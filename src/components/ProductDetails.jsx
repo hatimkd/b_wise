@@ -71,13 +71,13 @@ const ProductDetails = ({ products }) => {
 
       <button
         onClick={() => navigate(-1)}
-        className="flex h-full items-center justify-center text-yellow-500"
+        className="flex h-full items-center justify-center text-red-500"
       >
         <ArrowLeft className="mr-2" /> Retour
       </button>
 
       <img
-        src={"http://localhost:3000/" + product.img}
+        src={  product.img}
         alt={product.name}
         className="w-full h-64 object-cover rounded-lg mb-2"
       />
@@ -108,7 +108,7 @@ const ProductDetails = ({ products }) => {
 
       <button
         onClick={handleAddToCart}
-        className="bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600 transition duration-300"
+        className="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-900 transition duration-300"
       >
         <ShoppingBag className="mr-2 inline-block" /> Ajouter au panier
       </button>

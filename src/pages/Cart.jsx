@@ -62,7 +62,7 @@ const Cart = () => {
 
           <button
             onClick={handleCheckout}
-            className="mt-4 w-full py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
+            className="mt-4 w-full py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
           >
             Checkout
           </button>

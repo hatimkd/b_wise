@@ -9,7 +9,7 @@ export default function Navbar() {
         <h3 className="text-3xl font-bold  text-slate-800   ">Fast Delivery </h3>
       </div>
 
-      <UtensilsCrossed  className="w-24 bg-yellow-500 h-14 p-3 rounded-full "/>
+      <UtensilsCrossed  className="w-24 bg-red-500  h-14 p-3 rounded-full "/>
       {/* <img src="log.svg" alt="Logo" className="w-24 object-contain" /> */}
     </div>
   );

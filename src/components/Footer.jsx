@@ -1,6 +1,11 @@
-
 import { useState, useEffect } from "react";
-import { Bell, Heart, HouseIcon, ShoppingCart } from "lucide-react";
+import {
+  Bell,
+  Gamepad2Icon,
+  Heart,
+  HouseIcon,
+  ShoppingCart,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 
 export const Footer = () => {
@@ -16,10 +21,9 @@ export const Footer = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      if (currentScrollY > lastScrollY && currentScrollY > 30) {
+      if (currentScrollY > lastScrollY && currentScrollY > 19) {
         setIsFooterVisible(false);
       } else if (currentScrollY < lastScrollY) {
-
         setIsFooterVisible(true);
       }
 
@@ -52,7 +56,7 @@ export const Footer = () => {
         </button>
       </Link>
 
-      <Link to="/favorites" onClick={() => handleButtonClick("heart")}>
+      {/* <Link to="/favorites" onClick={() => handleButtonClick("heart")}>
         <button
           className={`flex flex-col items-center transition-transform duration-300 ${
             selectedButton === "heart" ? "translate-y-[-11px] rounded-full" : ""
@@ -63,8 +67,18 @@ export const Footer = () => {
               selectedButton === "heart" ? "text-red-600" : "text-black"
             }`}
           />
+
+
+
+
+
+
+
+
+
+
         </button>
-      </Link>
+      </Link> */}
 
       <Link to="/cart" onClick={() => handleButtonClick("cart")}>
         <button
@@ -80,18 +94,14 @@ export const Footer = () => {
         </button>
       </Link>
 
-      <Link
-        to="/notifications"
-        onClick={() => handleButtonClick("notification")}
-      >
+      <Link to="/games" onClick={() => handleButtonClick("notification")}>
         <button
+
           className={`flex flex-col items-center transition-transform duration-300 ${
-            selectedButton === "notification"
-              ? "translate-y-[-11px] rounded-full"
-              : ""
+            selectedButton === "games" ? "translate-y-[-11px] rounded-full" : ""
           }`}
         >
-          <Bell
+          <Gamepad2Icon
             className={`w-6 h-6 ${
               selectedButton === "notification" ? "text-red-600" : "text-black"
             }`}

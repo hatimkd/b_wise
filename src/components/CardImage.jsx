@@ -49,9 +49,9 @@ const CardImage = () => {
           <SwiperSlide key={category.id}>
             <div
               onClick={() => setSelectedCategory(category.id)} 
-              className={`w-full h-11 flex gap-2 hover:bg-yellow-500 items-center justify-center p-2 rounded-2xl font-semibold  px-5${
+              className={`w-full h-11 flex gap-2 hover:bg-red-500 items-center justify-center p-2 rounded-2xl font-semibold  px-5 ${
                 selectedCategory === category.id
-                  ? "bg-yellow-300 mx-0.5"
+                  ? "bg-red-500 mx-0.5"
                   : "text-slate-700"
               }`}
             >
@@ -90,7 +90,7 @@ const CardImage = () => {
                   ${product.price.toFixed(2)}
                 </h3>
 
-                <button
+                {/* <button
                   onClick={() => dispatch(addToFav(product))}
                   className="flex items-center justify-center w-8 h-8 rounded-full    "
                 >
@@ -98,14 +98,14 @@ const CardImage = () => {
                     size={16}
                     className="text-red-500 text-xl  font-semibold"
                   />
-                </button>
+                </button> */}
                 <button
                   onClick={() => dispatch(addToCart(product))}
                   className="flex items-center justify-center w-8 h-8 rounded-full    "
                 >
                   <ShoppingBag
                     size={16}
-                    className="text-yellow-500 text-xl  font-semibold"
+                    className="text-red-500 text-xl  font-semibold"
                   />
                 </button>
               </div>

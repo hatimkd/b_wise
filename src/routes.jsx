@@ -7,6 +7,7 @@ import Cart from "./pages/Cart";
 import Favorites from "./pages/Favorites";
 import { useSelector } from "react-redux";
 import ProductDetails from "./components/ProductDetails";
+import TicTacToe from "./pages/TicTacToe";
 const Approutes = () => {
 
   
@@ -22,8 +23,9 @@ const Approutes = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/cart" element={<Cart />} />
-              <Route path="/favorites" element={<Favorites />} />
+              {/* <Route path="/favorites" element={<Favorites />} /> */}
               <Route path="/product/:id" element={<ProductDetails products={products} />} />
+              <Route path="/games" element={<TicTacToe />} />
 
 
             </Routes>
