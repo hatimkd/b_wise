@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -30,18 +28,31 @@ const CardImage = () => {
     (product) => product.categoryId === selectedCategory
   );
 
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false); 
+
   useEffect(() => {
     console.log(cartItems); 
   }, [filteredProducts]);
 
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+    setShowSuccessMessage(true); 
+    setTimeout(() => {
+      setShowSuccessMessage(false); 
+    }, 3000);
+  };
+
   return (
     <div className="w-full ">
-   
+      {showSuccessMessage && (
+        <div className="bg-green-500 text-white text-center p-2 mx-3 rounded-lg mb-4">
+          Produit ajouté au panier !
+        </div>
+      )}
+
       <Swiper
         spaceBetween={20}
         slidesPerView={3}
-        // autoplay={{ delay: 3000 }} 
-        // loop={true}
         modules={[]} 
         className="my-5"
       >
@@ -62,7 +73,6 @@ const CardImage = () => {
         ))}
       </Swiper>
 
-
       <div className="grid grid-cols-2 gap-4 mt-5 bg-slate-100 p-2">
         {filteredProducts.map((product) => (
           <div
@@ -78,34 +88,24 @@ const CardImage = () => {
             </Link>
 
             <div className="w-full mt-4 text-center">
-              <span className="block text-xl   text-slate-700   font-semibold">
+              <span className="block text-xl text-slate-700 font-semibold">
                 {product.name}
               </span>
-              <span className="block text-md   text-slate-700   font-">
+              <span className="block text-md text-slate-700">
                 {product.option}
               </span>
 
-              <div className="w-full  flex   ">
-                <h3 className="w-full h-full   text-slate-700  flex items-center justify-start text-lg font-bold">
+              <div className="w-full flex">
+                <h3 className="w-full h-full text-slate-700 flex items-center justify-start text-lg font-bold">
                   ${product.price.toFixed(2)}
                 </h3>
-
-                {/* <button
-                  onClick={() => dispatch(addToFav(product))}
-                  className="flex items-center justify-center w-8 h-8 rounded-full    "
-                >
-                  <HeartIcon
-                    size={16}
-                    className="text-red-500 text-xl  font-semibold"
-                  />
-                </button> */}
                 <button
-                  onClick={() => dispatch(addToCart(product))}
-                  className="flex items-center justify-center w-8 h-8 rounded-full    "
+                  onClick={() => handleAddToCart(product)} // Updated to use the new handler
+                  className="flex items-center justify-center w-8 h-8 rounded-full"
                 >
                   <ShoppingBag
                     size={16}
-                    className="text-red-500 text-xl  font-semibold"
+                    className="text-red-500 text-xl font-semibold"
                   />
                 </button>
               </div>

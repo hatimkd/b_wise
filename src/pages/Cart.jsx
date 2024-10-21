@@ -16,9 +16,6 @@ const Cart = () => {
     setShowQRCode(true);  
   };
 
-  
-
-
   const qrData = {
     items: cartItems,
     total: totalAmount,
@@ -68,17 +65,29 @@ const Cart = () => {
           </button>
 
           {showQRCode && (
-            <div className="mt-4 flex flex-col items-center justify-center p-4 bg-white rounded-lg shadow-md text-center">
-              <h3 className="text-xl font-bold mb-2">
-                Code QR pour votre commande
-              </h3>
-              <QRCodeSVG value={JSON.stringify(qrData)} size={256} />
-            
+            <>
+          
+              <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-40"></div>
 
-              <p className="mt-2 text-sm text-gray-500">
-                donné au serveur de café
-              </p>
-            </div>
+            
+              <div className="fixed inset-0 flex items-center justify-center z-50">
+                <div className="bg-white p-8 rounded-lg shadow-md text-center    flex  flex-col  justify-center items-center ">
+                  <h3 className="text-xl font-bold mb-4 w-full  justify-center items-center ">
+                    Code QR pour votre commande
+                  </h3>
+                  <QRCodeSVG value={JSON.stringify(qrData)} size={256} />
+                  <p className="mt-2 text-sm text-gray-500">
+                    donné au serveur de café
+                  </p>
+                  <button
+                    onClick={() => setShowQRCode(false)}
+                    className="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+                  >
+                    Fermer
+                  </button>
+                </div>
+              </div>
+            </>
           )}
         </div>
       )}

@@ -96,7 +96,7 @@ const TicTacToe = () => {
       ) : (
         <div className="flex flex-col items-center">
           <button
-            onClick={() => navigate(-1)}
+            onClick={() => navigate("/")}
             className="flex h-full items-center justify-center text-red-500 mb-4"
           >
             <ArrowLeft className="mr-2" /> Retour
