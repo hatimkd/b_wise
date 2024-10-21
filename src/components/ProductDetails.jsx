@@ -17,6 +17,13 @@ const ProductDetails = ({ products }) => {
   useEffect(() => {
     if (products.length > 0) {
       setLoading(false);
+
+      
+
+
+
+      // console.log(  product);
+      
     }
   }, [products]);
 
@@ -77,7 +84,7 @@ const ProductDetails = ({ products }) => {
       </button>
 
       <img
-        src={  product.img}
+        src={product.img}
         alt={product.name}
         className="w-full h-64 object-cover rounded-lg mb-2"
       />
