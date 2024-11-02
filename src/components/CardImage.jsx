@@ -1,49 +1,52 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { addToCart, addToFav } from "../features/burgers/BurgerSlice"; 
+import { addToCart, fetchProducts } from "../features/burgers/BurgerSlice";
+import { fetchCategories } from "../features/burgers/CategorySlice";
+import Discount from "../pages/Discount";
 import "swiper/css";
-import "swiper/css/autoplay"; 
+import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
-import {
-  BookHeart,
-  Heart,
-  HeartHandshake,
-  HeartIcon,
-  HeartPulse,
-  Pizza,
-  ShoppingBag,
-} from "lucide-react";
+import { ShoppingBag } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const CardImage = () => {
-  const categories = useSelector((state) => state.category.items); 
-  const products = useSelector((state) => state.burger.items);
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]?.id); 
   const dispatch = useDispatch();
+  const categories = useSelector((state) => state.category.items);
+  const products = useSelector((state) => state.burger.items);
+  const [selectedCategory, setSelectedCategory] = useState(null); // Initialiser à null
 
-  const cartItems = useSelector((state) => state.burger.favorites); 
-  
+  // Filtrez les produits en fonction de la catégorie sélectionnée
   const filteredProducts = products.filter(
-    (product) => product.categoryId === selectedCategory
+    (product) => product.category_id === selectedCategory
   );
 
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false); 
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
+  // Récupérez les produits et les catégories au montage du composant
   useEffect(() => {
-    console.log(cartItems); 
-  }, [filteredProducts]);
+    dispatch(fetchProducts());
+    dispatch(fetchCategories());
+  }, [dispatch]);
+
+  // Met à jour la catégorie sélectionnée une fois que les catégories sont chargées
+  useEffect(() => {
+    if (categories.length > 0) {
+      setSelectedCategory(categories[0].id); // Définit la première catégorie comme sélectionnée
+    }
+  }, [categories]);
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
-    setShowSuccessMessage(true); 
+    setShowSuccessMessage(true);
     setTimeout(() => {
-      setShowSuccessMessage(false); 
+      setShowSuccessMessage(false);
     }, 3000);
   };
 
   return (
-    <div className="w-full ">
+    <div className="w-full">
+      <Discount />
       {showSuccessMessage && (
         <div className="bg-green-500 text-white text-center p-2 mx-3 rounded-lg mb-4">
           Produit ajouté au panier !
@@ -53,21 +56,20 @@ const CardImage = () => {
       <Swiper
         spaceBetween={20}
         slidesPerView={3}
-        modules={[]} 
+        modules={[Autoplay]}
         className="my-5"
       >
         {categories.map((category) => (
           <SwiperSlide key={category.id}>
             <div
-              onClick={() => setSelectedCategory(category.id)} 
-              className={`w-full h-11 flex gap-2 hover:bg-red-500 items-center justify-center p-2 rounded-2xl font-semibold  px-5 ${
+              onClick={() => setSelectedCategory(category.id)}
+              className={`w-full h-11 flex gap-2 hover:bg-red-500 items-center justify-center p-2 rounded-2xl font-semibold px-5 ${
                 selectedCategory === category.id
                   ? "bg-red-500 mx-0.5"
                   : "text-slate-700"
               }`}
             >
-              {category.icon}
-              {category.name}
+              {category.icon} {category.name}
             </div>
           </SwiperSlide>
         ))}
@@ -81,7 +83,7 @@ const CardImage = () => {
           >
             <Link to={`/product/${product.id}`} className="w-full h-full">
               <img
-                src={product.img}
+                src={product.image}
                 alt={product.name}
                 className="w-full h-48 object-cover rounded-xl"
               />
@@ -100,7 +102,7 @@ const CardImage = () => {
                   ${product.price.toFixed(2)}
                 </h3>
                 <button
-                  onClick={() => handleAddToCart(product)} // Updated to use the new handler
+                  onClick={() => handleAddToCart(product)}
                   className="flex items-center justify-center w-8 h-8 rounded-full"
                 >
                   <ShoppingBag

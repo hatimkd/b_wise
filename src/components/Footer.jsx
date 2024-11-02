@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import {
   Bell,
+  Diameter,
   Gamepad2Icon,
   Heart,
   HouseIcon,
+  Percent,
   ShoppingCart,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { DisclosureButton } from "@headlessui/react";
 
 export const Footer = () => {
   const [selectedButton, setSelectedButton] = useState("home");
@@ -96,7 +99,6 @@ export const Footer = () => {
 
       <Link to="/games" onClick={() => handleButtonClick("notification")}>
         <button
-
           className={`flex flex-col items-center transition-transform duration-300 ${
             selectedButton === "games" ? "translate-y-[-11px] rounded-full" : ""
           }`}
@@ -104,6 +106,21 @@ export const Footer = () => {
           <Gamepad2Icon
             className={`w-6 h-6 ${
               selectedButton === "notification" ? "text-red-600" : "text-black"
+            }`}
+          />
+        </button>
+      </Link>
+      <Link to="/discount"  onClick={() => handleButtonClick("discount")}>
+        <button
+          className={`flex flex-col items-center transition-transform duration-300 ${
+            selectedButton === "discount"
+              ? "translate-y-[-11px] rounded-full"
+              : ""
+          }`}
+        >
+          <Percent
+            className={`w-6 h-6 ${
+              selectedButton === "discount" ? "text-red-600" : "text-black"
             }`}
           />
         </button>

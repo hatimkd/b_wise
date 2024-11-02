@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import Cart from "./pages/Cart";
 import Favorites from "./pages/Favorites";
+import Discount from "./pages/Discount";
 import { useSelector } from "react-redux";
 import ProductDetails from "./components/ProductDetails";
 import TicTacToe from "./pages/TicTacToe";
@@ -26,6 +27,9 @@ const Approutes = () => {
               {/* <Route path="/favorites" element={<Favorites />} /> */}
               <Route path="/product/:id" element={<ProductDetails products={products} />} />
               <Route path="/games" element={<TicTacToe />} />
+
+              <Route path="/discount" element={<Discount  />} /> {/* Add Discount route */}
+
 
 
             </Routes>

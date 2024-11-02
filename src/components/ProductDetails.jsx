@@ -7,8 +7,8 @@ import { ArrowLeft, ShoppingBag, CheckCircle } from "lucide-react";
 const ProductDetails = ({ products }) => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
-  const [extras, setExtras] = useState([]); 
-  const [showSuccess, setShowSuccess] = useState(false); 
+  const [extras, setExtras] = useState([]);
+  const [showSuccess, setShowSuccess] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -18,12 +18,7 @@ const ProductDetails = ({ products }) => {
     if (products.length > 0) {
       setLoading(false);
 
-      
-
-
-
       // console.log(  product);
-      
     }
   }, [products]);
 
@@ -35,7 +30,6 @@ const ProductDetails = ({ products }) => {
     return <div>Produit non trouvé</div>;
   }
 
-  
   const availableExtras = [
     { name: "sauce", price: 1 },
     { name: "fromage", price: 1.5 },
@@ -60,15 +54,14 @@ const ProductDetails = ({ products }) => {
 
   const handleAddToCart = () => {
     dispatch(addToCart({ ...product, price: totalPrice, extras }));
-    setShowSuccess(true);  
+    setShowSuccess(true);
     setTimeout(() => {
-      setShowSuccess(false); 
+      setShowSuccess(false);
     }, 2000);
   };
 
   return (
-    <div className="w-full h-full flex flex-col items-center p-5">
-     
+    <div className="w-full h-[90vh] flex flex-col items-center p-5">
       {showSuccess && (
         <div className="fixed top-0 left-1/2 transform  -translate-x-1/2 mt-4 z-50 flex items-center   gap-3  font-semibold text-white bg-green-500 p-3 rounded-lg shadow-lg transition-opacity duration-300 ease-in-out">
           <CheckCircle className="" />
@@ -84,14 +77,13 @@ const ProductDetails = ({ products }) => {
       </button>
 
       <img
-        src={product.img}
+        src={product.image}
         alt={product.name}
         className="w-full h-64 object-cover rounded-lg mb-2"
       />
       <h2 className="text-3xl font-bold text-slate-800 mb-2">{product.name}</h2>
       <p className="text-lg text-slate-600 mb-4">{product.option}</p>
 
-       
       <div className="flex flex-col gap-4 mb-2">
         {availableExtras.map((extra) => (
           <label
